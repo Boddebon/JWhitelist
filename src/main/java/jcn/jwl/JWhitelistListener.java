@@ -13,6 +13,7 @@ public class JWhitelistListener implements Listener {
     private final JWhitelist plugin;
     private final JWhitelistDatabase databaseManager;
 
+
     public JWhitelistListener(JWhitelist plugin) {
         this.plugin = plugin;
         this.databaseManager = plugin.getDatabaseManager();
@@ -30,8 +31,9 @@ public class JWhitelistListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
+        String group = plugin.getGroup();
         Player player = event.getPlayer();
-        if (!player.hasPlayedBefore()) {
+        if (!player.hasPermission(group)) {
             LuckPermsApi.addPermission(player.getName());
         }
     }
